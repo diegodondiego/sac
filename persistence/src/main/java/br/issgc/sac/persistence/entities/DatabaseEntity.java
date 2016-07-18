@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author dinhego
  *
  */
-interface DatabaseEntity extends Serializable {
+public interface DatabaseEntity extends Serializable {
 
 	/**
 	 *

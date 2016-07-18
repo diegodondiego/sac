@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.issgc.sac.persistence.entities.Record;
@@ -24,17 +24,17 @@ import br.issgc.sac.persistence.entities.Record;
  */
 public class CheckConnection {
 
-	private EntityManagerFactory entityManagerFactory;
+	protected static EntityManagerFactory entityManagerFactory;
 
 	/**
 	 * just check if the database is up
 	 */
-	@Before
-	public void throughPersistenceXML() {
+	@BeforeClass
+	public static void throughPersistenceXML() {
 
-		this.entityManagerFactory = Persistence.createEntityManagerFactory("sac");
+		entityManagerFactory = Persistence.createEntityManagerFactory("sac");
 
-		assertTrue(this.entityManagerFactory != null);
+		assertTrue(entityManagerFactory != null);
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class CheckConnection {
 	@Test
 	public void checkTableCreation() {
 
-		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+		final EntityManager entityManager = CheckConnection.entityManagerFactory.createEntityManager();
 
 		final List<Record> result = entityManager.createQuery("select r from Record r", Record.class).getResultList();
 

@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.issgc</groupId>
+	<artifactId>sac</artifactId>
+	<version>0.0.1</version>
+	<packaging>pom</packaging>
+	<name>sac</name>
+	<description>project for tests with jpa and cdi</description>
+	<modules>
+		<module>persistence</module>
+	</modules>
+
+	<properties>
+		<openjpa.version>2.4.1</openjpa.version>
+		<junit.version>4.12</junit.version>
+		<javaee.version>7.0</javaee.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.openjpa</groupId>
+				<artifactId>openjpa-persistence-jdbc</artifactId>
+				<version>${openjpa.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>${javaee.version}</version>
+				<scope>provided</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>

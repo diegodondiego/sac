@@ -32,7 +32,7 @@ public abstract class CommonDatabaseOprations<T extends DatabaseEntity> implemen
 	/**
 	 * the entity that will be handled by the repository. just to help the common methods.
 	 */
-	protected Class<T> entityClass;
+	protected Class<T> relatedEntityClass;
 
 	/*
 	 * (non-Javadoc)
@@ -42,9 +42,9 @@ public abstract class CommonDatabaseOprations<T extends DatabaseEntity> implemen
 	@Override
 	public List<T> findASampleOfEntities(int maxNumberOfSamples) {
 
-		final CriteriaQuery<T> sampleQuery = this.entityManager.getCriteriaBuilder().createQuery(this.entityClass);
+		final CriteriaQuery<T> sampleQuery = this.entityManager.getCriteriaBuilder().createQuery(this.relatedEntityClass);
 
-		final Root<T> entityRoot = sampleQuery.from(this.entityClass);
+		final Root<T> entityRoot = sampleQuery.from(this.relatedEntityClass);
 		sampleQuery.select(entityRoot);
 
 		return this.entityManager.createQuery(sampleQuery).setMaxResults(maxNumberOfSamples).getResultList();
@@ -58,10 +58,10 @@ public abstract class CommonDatabaseOprations<T extends DatabaseEntity> implemen
 	@Override
 	public T findById(Serializable id) {
 		if (id == null) {
-			throw new IllegalArgumentException(format("Impossible to find a entity of type [%s] using an null id.", this.entityClass));
+			throw new IllegalArgumentException(format("Impossible to find a entity of type [%s] using an null id.", this.relatedEntityClass));
 		}
 
-		return this.entityManager.find(this.entityClass, id);
+		return this.entityManager.find(this.relatedEntityClass, id);
 	}
 
 	@Override
